@@ -1,7 +1,8 @@
 package main.java.ru.clevertec.check.repositories;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public interface Repository<T> {
-    T findById(String id) throws IOException;
+    Optional<T> findById(String id) throws IOException;
 }

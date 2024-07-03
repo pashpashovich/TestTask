@@ -8,7 +8,7 @@ public class DiscountCardImpl implements DiscountCard {
 
     public DiscountCardImpl(String number, double discountRate) {
         this.number = number;
-        this.discountRate = discountRate;
+        this.discountRate = discountRate/100;
     }
 
     @Override

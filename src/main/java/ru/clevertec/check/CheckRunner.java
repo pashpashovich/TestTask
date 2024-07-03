@@ -1,8 +1,6 @@
 package main.java.ru.clevertec.check;
 
-import main.java.ru.clevertec.check.exceptions.InsufficientStockException;
-import main.java.ru.clevertec.check.exceptions.NoDiscountCardException;
-import main.java.ru.clevertec.check.exceptions.NoProductException;
+import main.java.ru.clevertec.check.exceptions.*;
 import main.java.ru.clevertec.check.models.CartItem;
 import main.java.ru.clevertec.check.models.DiscountCard;
 import main.java.ru.clevertec.check.models.Product;
@@ -16,7 +14,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class CheckRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String productFilePath = "./src/main/resources/products.csv";
         String discountCardFilePath = "./src/main/resources/discountCards.csv";
 
@@ -40,12 +38,12 @@ public class CheckRunner {
                     try {
                         Product product = productRepo.findById(productId);
                         if (product == null) {
-                            throw new NoProductException("Товар с ID " + productId + " не найден");
+                            throw Objects.requireNonNull(ExceptionFactory.createException(ExceptionType.NOPRODUCTEXCEPTION, productId, null, 0, null));
                         }
                         int existingQuantity = cartItems.getOrDefault(product.getName(), new CartItem(product, 0)).getQuantity();
                         if (product.getQuantityInStock() < existingQuantity + quantity) {
                             cartItems.put(product.getName(), new CartItem(product, product.getQuantityInStock()));
-                            throw new InsufficientStockException("Недостаточно товара " + product.getName() + " на складе. Доступно: " + product.getQuantityInStock() + ". Запрошено: " + (existingQuantity + quantity));
+                            throw Objects.requireNonNull(ExceptionFactory.createException(ExceptionType.INSUFFICIENTSTOCKEXCEPTION, 0, product, existingQuantity + quantity, null));
                         }
                         cartItems.put(product.getName(), new CartItem(product, existingQuantity + quantity));
                     } catch (NoProductException | InsufficientStockException e) {
@@ -62,7 +60,7 @@ public class CheckRunner {
                 discountCard = discountCardRepo.findById(discountCardNumber);
                 if (discountCard.isEmpty()) {
                     try {
-                        throw new NoDiscountCardException("Скидочной карты с номером " + discountCardNumber + " не существует");
+                        throw Objects.requireNonNull(ExceptionFactory.createException(ExceptionType.NODISCOUNTCARDEXCEPTION, 0, null, 0, discountCardNumber));
                     } catch (NoDiscountCardException e) {
                         System.out.println(e);
                     }
@@ -70,24 +68,22 @@ public class CheckRunner {
             }
             List<CartItem> cartItemsList = new ArrayList<>(cartItems.values());
             double total = cartItemsList.stream().mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity()).sum();
-
             DiscountPolicy discountPolicy = new DiscountPolicy();
-            double discount = discountPolicy.calculateDiscount(new Receipt.Builder().setItems(cartItemsList).setTotal(total).build(), discountCard);
+            double discount = discountPolicy.calculateDiscount(new Receipt.ReceiptBuilder().setItems(cartItemsList).setTotal(total).build(), discountCard);
             double finalTotal = total - discount;
-
-            Receipt receipt = new Receipt.Builder()
+            Receipt receipt = new Receipt.ReceiptBuilder()
                     .setItems(cartItemsList)
                     .setTotal(total)
                     .setDiscount(discount)
                     .setFinalTotal(finalTotal)
+                    .setDiscountCard(discountCard)
                     .build();
 
             ReceiptPrinter printer = new ReceiptPrinter();
             printer.printToConsole(receipt);
             printer.printToFile(receipt, "result.csv");
-
         } catch (IOException e) {
-            System.err.println("Error reading files: " + e.getMessage());
+           throw Objects.requireNonNull(ExceptionFactory.createException(ExceptionType.READFILEEXCEPTION, 0, null, 0, null));
         } catch (NumberFormatException e) {
             System.err.println("Error parsing input: " + e.getMessage());
         }

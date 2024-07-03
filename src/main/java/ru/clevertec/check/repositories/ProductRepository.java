@@ -23,8 +23,9 @@ public class ProductRepository {
                 int id = Integer.parseInt(stripQuotes(values[0]));
                 String name = stripQuotes(values[1]);
                 double price = parsePrice(stripQuotes(values[2]),stripQuotes(values[3]));
+                int quantity = Integer.parseInt(stripQuotes(values[4]));
                 boolean isWholesale = "+".equals(stripQuotes(values[5]));
-                products.put(id, new ProductImpl(id, name, price, isWholesale));
+                products.put(id, new ProductImpl(id, name, price, quantity,isWholesale));
             }
         }
     }

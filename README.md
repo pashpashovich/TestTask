@@ -20,4 +20,7 @@ java -cp "C:\Users\Павел\OneDrive\Рабочий стол\2 курс\4 се
 ```
 java -cp src ./src/main/java/ru/clevertec/check/CheckRunner.java 3-1 2-5 5-1 discountCard=1111 balanceDebitCard=100
 ```
+<<<<<<< HEAD
 4. Чек будет сгенерирован и сохранен в файле result.csv в корне проекта, а также выведен в консоль.
+=======
+>>>>>>> origin/feature/entry-core

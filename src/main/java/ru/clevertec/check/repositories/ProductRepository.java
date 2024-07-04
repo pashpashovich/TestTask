@@ -20,7 +20,7 @@ public class ProductRepository {
                 String name = stripQuotes(values[1]);
                 double price = parsePrice(stripQuotes(values[2]));
                 int quantity = Integer.parseInt(stripQuotes(values[3]));
-                boolean isWholesale = "+".equals(stripQuotes(values[4]));
+                boolean isWholesale = "true".equals(stripQuotes(values[4]));
                 products.put(id, new ProductImpl(id, name, price, quantity,isWholesale));
             }
         }

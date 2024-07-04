@@ -1,9 +1,9 @@
 package main.java.ru.clevertec.check.exceptions;
 
 public class NoProductException extends AbstractException {
-    public NoProductException(String message) {
+    public NoProductException(String message,String path) {
         super(message);
-        writeErrorToCSV(getExceptionStatus().name());
+        writeErrorToCSV(getExceptionStatus().name(),path);
     }
 
     @Override

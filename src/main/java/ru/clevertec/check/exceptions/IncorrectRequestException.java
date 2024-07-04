@@ -2,9 +2,9 @@ package main.java.ru.clevertec.check.exceptions;
 
 public class IncorrectRequestException extends AbstractException{
 
-    public IncorrectRequestException(String message) {
+    public IncorrectRequestException(String message,String path) {
         super(message);
-        writeErrorToCSV(getExceptionStatus().name());
+        writeErrorToCSV(getExceptionStatus().name(),path);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package main.java.ru.clevertec.check.exceptions;
 
 public class InsufficientStockException extends AbstractException {
-    public InsufficientStockException(String message) {
+    public InsufficientStockException(String message,String path) {
         super(message);
-        writeErrorToCSV(getExceptionStatus().name());
+        writeErrorToCSV(getExceptionStatus().name(),path);
     }
 
     @Override

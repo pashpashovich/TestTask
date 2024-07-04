@@ -1,9 +1,9 @@
 package main.java.ru.clevertec.check.exceptions;
 
 public class NotEnoughMoneyException extends AbstractException {
-    public NotEnoughMoneyException(String message) {
+    public NotEnoughMoneyException(String message,String path) {
         super(message);
-        writeErrorToCSV(getExceptionStatus().name());
+        writeErrorToCSV(getExceptionStatus().name(),path);
     }
 
     @Override

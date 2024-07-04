@@ -15,16 +15,12 @@ public class ProductRepository {
             br.readLine();
             String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                if (stripQuotes(values[2]).endsWith("l")) {
-                    values[1] = values[1] + "," + values[2];
-                    System.arraycopy(values, 3, values, 2, 4);
-                }
+                String[] values = line.split(";");
                 int id = Integer.parseInt(stripQuotes(values[0]));
                 String name = stripQuotes(values[1]);
-                double price = parsePrice(stripQuotes(values[2]),stripQuotes(values[3]));
-                int quantity = Integer.parseInt(stripQuotes(values[4]));
-                boolean isWholesale = "+".equals(stripQuotes(values[5]));
+                double price = parsePrice(stripQuotes(values[2]));
+                int quantity = Integer.parseInt(stripQuotes(values[3]));
+                boolean isWholesale = "+".equals(stripQuotes(values[4]));
                 products.put(id, new ProductImpl(id, name, price, quantity,isWholesale));
             }
         }
@@ -34,11 +30,11 @@ public class ProductRepository {
         return value.replaceAll("^\"|\"$", "");
     }
 
-    private double parsePrice(String value1,String value2) throws IOException {
+    private double parsePrice(String value) throws IOException {
         try {
-            return Double.parseDouble(value1+"."+value2);
+            return Double.parseDouble(value.replaceAll(",","."));
         } catch (NumberFormatException e) {
-            throw new IOException("Невозможно преобразовать в тип double(: " + value1+value2, e);
+            throw new IOException("Невозможно преобразовать в тип double(: " + value, e);
         }
     }
     public <Optional> Product findById(int id) {
@@ -46,7 +42,6 @@ public class ProductRepository {
             if (product.getId()==id) {
                 return product;
             }
-
         }
         return null;
     }

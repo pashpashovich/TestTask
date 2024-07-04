@@ -17,7 +17,7 @@ public class DiscountCardRepository implements Repository<DiscountCard> {
             br.readLine();
             String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
+                String[] values = line.split(";");
                 String id = values[0];
                 String number = values[1];
                 double discountRate = Double.parseDouble(values[2]);

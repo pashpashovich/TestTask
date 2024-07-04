@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59187e29-3df9-412d-a252-15cd5a3080b5" name="Changes" comment="Добавлена работа с балансом на карте">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="59187e29-3df9-412d-a252-15cd5a3080b5" name="Changes" comment="README.md обновлен" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +22,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/entry-core" />
+        <entry key="$PROJECT_DIR$" value="feature/entry-file" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +47,7 @@
     "WebServerToolWindowFactoryState": "false",
     "database.data.extractors.current.export.id": "CSV-Groovy.csv.groovy",
     "database.data.extractors.current.id": "CSV-Groovy.csv.groovy",
-    "git-widget-placeholder": "feature/entry-file",
+    "git-widget-placeholder": "feature/entry-core",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -128,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720037727228</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="README.md обновлен">
+      <option name="closed" value="true" />
+      <created>1720093200098</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720093200098</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +169,8 @@
     <MESSAGE value="улучшена работа с исключениями)" />
     <MESSAGE value="Сделана правильно формирование csv файла" />
     <MESSAGE value="Добавлена работа с балансом на карте" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена работа с балансом на карте" />
+    <MESSAGE value="README.md обновлен" />
+    <option name="LAST_COMMIT_MESSAGE" value="README.md обновлен" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -4,28 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59187e29-3df9-412d-a252-15cd5a3080b5" name="Changes" comment="README.md обновлен">
+    <list default="true" id="456e10d0-82a0-4414-8353-0eb468f57c77" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/TestTask.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/clevertec/check/service/ReceiptPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/clevertec/check/service/ReceiptPrinter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Enum" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/entry-file" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -34,10 +27,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
+  &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="2ie0hQfkbUoIY2GrA9xUsC7unpr" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2inFkc2s9543Y3dkI0TsmK8lgyg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -48,8 +40,6 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;CSV-Groovy.csv.groovy&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;CSV-Groovy.csv.groovy&quot;,
     &quot;git-widget-placeholder&quot;: &quot;feature/entry-core&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -57,16 +47,16 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.16699219&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;coverage&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration name="CheckRunner" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.java.ru.clevertec.check.CheckRunner" />
-      <module name="check" />
+      <module name="TestTask" />
       <option name="PROGRAM_PARAMETERS" value="3-1 2-5 5-1 discountCard=1111 balanceDebitCard=100" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -76,107 +66,17 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="59187e29-3df9-412d-a252-15cd5a3080b5" name="Changes" comment="" />
-      <created>1719835855081</created>
+      <changelist id="456e10d0-82a0-4414-8353-0eb468f57c77" name="Changes" comment="" />
+      <created>1720118577734</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1719835855081</updated>
-      <workItem from="1719835856111" duration="1334000" />
-      <workItem from="1719837211281" duration="2659000" />
-      <workItem from="1719840254869" duration="1039000" />
-      <workItem from="1719841754583" duration="9187000" />
-      <workItem from="1719854735879" duration="3455000" />
-      <workItem from="1719864137287" duration="148000" />
-      <workItem from="1719906702164" duration="611000" />
-      <workItem from="1719935440091" duration="255000" />
-      <workItem from="1719940783742" duration="1745000" />
-      <workItem from="1719997507807" duration="627000" />
-      <workItem from="1719998722311" duration="825000" />
-      <workItem from="1720016014759" duration="1219000" />
-      <workItem from="1720017258775" duration="7441000" />
-      <workItem from="1720025553628" duration="10110000" />
-      <workItem from="1720078627465" duration="2607000" />
+      <updated>1720118577734</updated>
+      <workItem from="1720118579354" duration="770000" />
+      <workItem from="1720119372119" duration="420000" />
     </task>
-    <task id="LOCAL-00001" summary="1">
-      <option name="closed" value="true" />
-      <created>1719941095190</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1719941095190</updated>
-    </task>
-    <task id="LOCAL-00002" summary="1 commit)">
-      <option name="closed" value="true" />
-      <created>1720019569635</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1720019569635</updated>
-    </task>
-    <task id="LOCAL-00003" summary="улучшена работа с исключениями)">
-      <option name="closed" value="true" />
-      <created>1720028783662</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1720028783662</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Сделана правильно формирование csv файла">
-      <option name="closed" value="true" />
-      <created>1720037727228</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1720037727228</updated>
-    </task>
-    <task id="LOCAL-00005" summary="README.md обновлен">
-      <option name="closed" value="true" />
-      <created>1720093200098</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1720093200098</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="feature/entry-core" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="1" />
-    <MESSAGE value="1 commit)" />
-    <MESSAGE value="улучшена работа с исключениями)" />
-    <MESSAGE value="Сделана правильно формирование csv файла" />
-    <MESSAGE value="Добавлена работа с балансом на карте" />
-    <MESSAGE value="README.md обновлен" />
-    <option name="LAST_COMMIT_MESSAGE" value="README.md обновлен" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

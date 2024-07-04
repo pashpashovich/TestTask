@@ -17,7 +17,6 @@ public class CheckRunner {
     public static void main(String[] args) throws Exception {
         String productFilePath = "./src/main/resources/products.csv";
         String discountCardFilePath = "./src/main/resources/discountCards.csv";
-
         try {
             ProductRepository productRepo = new ProductRepository(productFilePath);
             DiscountCardRepository discountCardRepo = new DiscountCardRepository(discountCardFilePath);
@@ -52,7 +51,7 @@ public class CheckRunner {
                     }
                 }
             }
-
+            if (cartItems.isEmpty()) throw Objects.requireNonNull(ExceptionFactory.createException(ExceptionType.INCORRECTREQUESTEXCEPTION, 0, null, 0, null));
             Optional<DiscountCard> discountCard = Optional.empty();
             if (discountCardNumber == null) {
                 System.out.println("Скидочная карта не была представлена");
@@ -71,6 +70,7 @@ public class CheckRunner {
             DiscountPolicy discountPolicy = new DiscountPolicy();
             double discount = discountPolicy.calculateDiscount(new Receipt.ReceiptBuilder().setItems(cartItemsList).setTotal(total).build(), discountCard);
             double finalTotal = total - discount;
+            if (finalTotal>balanceDebitCard) throw Objects.requireNonNull(ExceptionFactory.createException(ExceptionType.NOTENOUGHMONEYEXCEPTION, 0, null, 0, null));
             Receipt receipt = new Receipt.ReceiptBuilder()
                     .setItems(cartItemsList)
                     .setTotal(total)
@@ -82,7 +82,10 @@ public class CheckRunner {
             ReceiptPrinter printer = new ReceiptPrinter();
             printer.printToConsole(receipt);
             printer.printToFile(receipt, "result.csv");
-        } catch (IOException e) {
+        }catch (IncorrectRequestException | NotEnoughMoneyException e) {
+            System.out.println(e);
+        }
+        catch (IOException e) {
            throw Objects.requireNonNull(ExceptionFactory.createException(ExceptionType.READFILEEXCEPTION, 0, null, 0, null));
         } catch (NumberFormatException e) {
             System.err.println("Error parsing input: " + e.getMessage());

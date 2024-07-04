@@ -13,6 +13,6 @@ public class NoProductException extends AbstractException {
 
     @Override
     public String toString() {
-        return "NoProductException: " + getMessage();
+        return "NoProductException: " + getMessage()+" Статус: "+getExceptionStatus();
     }
 }

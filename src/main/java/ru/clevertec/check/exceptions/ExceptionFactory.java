@@ -18,6 +18,12 @@ public class ExceptionFactory {
             case NODISCOUNTCARDEXCEPTION -> {
                 return new NoDiscountCardException("Скидочной карты с номером " + discountCardNumber + " не существует");
             }
+            case INCORRECTREQUESTEXCEPTION -> {
+                return new IncorrectRequestException("Неверный формат запроса(");
+            }
+            case NOTENOUGHMONEYEXCEPTION -> {
+                return new NotEnoughMoneyException("Недостаточно средств для оплаты...");
+            }
         }
         return null;
     }

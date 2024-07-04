@@ -9,7 +9,7 @@ public class ReadFileException extends AbstractException {
 
     @Override
     public String toString() {
-        return "ReadFileException: " + getMessage();
+        return "ReadFileException: " + getMessage()+" Статус: "+getExceptionStatus();
     }
 
     @Override

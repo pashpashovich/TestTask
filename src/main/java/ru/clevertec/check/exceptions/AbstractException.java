@@ -13,7 +13,7 @@ public abstract class AbstractException extends Exception {
 
     public void writeErrorToCSV(String errorMessage) {
         String fileName = "result.csv";
-        String message = "ERROR\n " + errorMessage + "\n";
+        String message = "ERROR\n" + errorMessage + "\n";
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(message);
         } catch (IOException e) {

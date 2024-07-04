@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="59187e29-3df9-412d-a252-15cd5a3080b5" name="Changes" comment="README.md обновлен">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/clevertec/check/repositories/DiscountCardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/clevertec/check/repositories/DiscountCardRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/clevertec/check/repositories/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/clevertec/check/repositories/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/discountCards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/discountCards.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/products.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/products.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/clevertec/check/service/ReceiptPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/clevertec/check/service/ReceiptPrinter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +64,7 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="CheckRunner" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.java.ru.clevertec.check.CheckRunner" />
       <module name="check" />
       <option name="PROGRAM_PARAMETERS" value="3-1 2-5 5-1 discountCard=1111 balanceDebitCard=100" />

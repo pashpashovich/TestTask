@@ -28,9 +28,9 @@ public class ReceiptPrinter {
             pw.println(currentDate.format(formatter)+";"+localTime.format(localTimeFormatter));
             pw.println();
             pw.println("QTY;DESCRIPTION;PRICE;DISCOUNT;TOTAL");
-            double discount = 0,total;
+            double discount = 0;
             for (CartItem item: receipt.getItems()) {
-                if (item.getQuantity()>=5) discount = item.getProduct().getPrice() * 0.1;
+                if (item.getQuantity()>=5 && item.getProduct().isWholesale()) discount = item.getProduct().getPrice()*item.getQuantity() * 0.1;
                 else if (receipt.getDiscountCard().isPresent()) discount = item.getProduct().getPrice()* receipt.getDiscountCard().get().getDiscountRate();
                 pw.println(item.getQuantity()+";"+item.getProduct().getName()+";"+String.format("%.2f$",item.getProduct().getPrice()).replace(",", ".")+";"+String.format("%.2f$",discount).replace(",", ".")+";"+String.format("%.2f$",(item.getQuantity()*item.getProduct().getPrice())).replace(",", "."));
             }
@@ -53,7 +53,7 @@ public class ReceiptPrinter {
         System.out.printf("%-8s%-20s%-10s%-10s%-10s%n", "Кол-во", "Описание", "Цена", "Скидка", "Итого");
         for (CartItem item : receipt.getItems()) {
             Product product = item.getProduct();
-            double discount = (item.getQuantity() >= 5) ? product.getPrice() * 0.1 : product.getPrice() * receipt.getDiscountCard().orElse(new DiscountCard() {
+            double discount = (item.getQuantity() >= 5 && item.getProduct().isWholesale()) ? product.getPrice() * item.getQuantity()*0.1 : product.getPrice() * item.getQuantity()* receipt.getDiscountCard().orElse(new DiscountCard() {
                 @Override
                 public String getNumber() {
                     return null;

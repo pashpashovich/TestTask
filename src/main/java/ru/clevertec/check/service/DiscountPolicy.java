@@ -11,6 +11,7 @@ import java.util.Optional;
 public class DiscountPolicy {
 
     public double calculateDiscount(Receipt receipt, Optional<DiscountCard> discountCard) {
+        if(receipt.getItems()==null) return 0;
         double discount = 0;
         for (CartItem item : receipt.getItems()) {
             Product product = item.getProduct();

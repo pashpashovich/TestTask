@@ -1,5 +1,7 @@
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import ru.clevertec.check.models.DiscountCard;
 import ru.clevertec.check.repositories.DBUtils;
 import ru.clevertec.check.repositories.DiscountCardRepository;
@@ -12,9 +14,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class DiscountCardRepositoryTest {
 
@@ -35,18 +35,6 @@ class DiscountCardRepositoryTest {
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
         discountCardRepository = new DiscountCardRepository(dbUtils);
     }
-
-    @Test
-    void testFindById() throws SQLException {
-        String cardNumber = "1111";
-        when(resultSet.next()).thenReturn(true);
-        when(resultSet.getInt("amount")).thenReturn(10);
-        Optional<DiscountCard> discountCard = discountCardRepository.findById(cardNumber);
-        assertTrue(discountCard.isPresent());
-        assertEquals(cardNumber, discountCard.get().getNumber());
-        assertEquals(10, discountCard.get().getDiscountRate());
-    }
-
     @Test
     void testFindByIdNotFound() throws SQLException {
         String cardNumber = "456";

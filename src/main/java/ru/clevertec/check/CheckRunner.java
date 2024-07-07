@@ -1,7 +1,5 @@
 package ru.clevertec.check;
 
-
-
 import ru.clevertec.check.exceptions.*;
 import ru.clevertec.check.models.CartItem;
 import ru.clevertec.check.models.DiscountCard;

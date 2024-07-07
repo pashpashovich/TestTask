@@ -18,9 +18,7 @@ import java.util.Map;
 
 public class ProductRepository {
 
-    private static final String toGetAllProducts="SELECT * FROM \"public\".\"product\"";
     private static final String toGetProductByID="SELECT * FROM \"public\".\"product\" WHERE id=?";
-    private final Map<Integer, Product> products = new HashMap<>();
     private final DBUtils dbUtils;
 
     public ProductRepository(DBUtils dbUtils) {
@@ -44,26 +42,6 @@ public class ProductRepository {
         }
         return product;
     }
-
-    public List<Product> getAllProducts() {
-        List<Product> products = new ArrayList<>();
-        try(Connection connection=dbUtils.getConnection();
-            PreparedStatement preparedStatement=connection.prepareStatement(toGetAllProducts)) {
-            ResultSet rs=preparedStatement.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String description=rs.getString("description");
-                double price=rs.getDouble("price");
-                int quantity_in_stock=rs.getInt("quantity_in_stock");
-                boolean wholesale_product=rs.getBoolean("wholesale_product");
-                products.add(new ProductImpl(id,description,price,quantity_in_stock,wholesale_product));
-            }
-        } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e.getMessage());
-        }
-        return products;
-    }
-
 }
 
 

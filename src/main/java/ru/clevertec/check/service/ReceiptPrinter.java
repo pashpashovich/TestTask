@@ -15,8 +15,10 @@ import java.time.format.DateTimeFormatter;
 
 public class ReceiptPrinter {
 
-    public void printToFile(Receipt receipt, String filePath) throws IOException {
+    public static void printToFile(Receipt receipt, String filePath) throws IOException {
+        System.out.println("Тут");
         try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
+            System.out.println("Тут2");
             pw.println("Date;Time");
             LocalDate currentDate = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -28,13 +30,14 @@ public class ReceiptPrinter {
             double discount = 0,total;
             for (CartItem item: receipt.getItems()) {
                 if (item.getQuantity()>=5 && item.getProduct().isWholesale()) discount = item.getProduct().getPrice()*item.getQuantity() * 0.1;
-                else if (receipt.getDiscountCard().isPresent()) discount = item.getProduct().getPrice()*item.getQuantity()* receipt.getDiscountCard().get().getDiscountRate();
+                else if (receipt.getDiscountCard().isPresent()) discount = item.getProduct().getPrice()*item.getQuantity()* receipt.getDiscountCard().get().getDiscountRate()/100;
                 pw.println(item.getQuantity()+";"+item.getProduct().getName()+";"+String.format("%.2f$",item.getProduct().getPrice()).replace(",", ".")+";"+String.format("%.2f$",discount).replace(",", ".")+";"+String.format("%.2f$",(item.getQuantity()*item.getProduct().getPrice())).replace(",", "."));
+                System.out.println(item.getQuantity()+";"+item.getProduct().getName()+";"+String.format("%.2f$",item.getProduct().getPrice()).replace(",", ".")+";"+String.format("%.2f$",discount).replace(",", ".")+";"+String.format("%.2f$",(item.getQuantity()*item.getProduct().getPrice())).replace(",", "."));
             }
             if (receipt.getDiscountCard().isPresent()) {
                 pw.println();
                 pw.println("DISCOUNT CARD;DISCOUNT PERCENTAGE");
-                pw.println(receipt.getDiscountCard().get().getNumber()+";"+ (int) (receipt.getDiscountCard().get().getDiscountRate() * 100) +"%");
+                pw.println(receipt.getDiscountCard().get().getNumber()+";"+ (int) (receipt.getDiscountCard().get().getDiscountRate()) +"%");
             }
             pw.println();
             pw.println("TOTAL PRICE;TOTAL DISCOUNT;TOTAL WITH DISCOUNT");
@@ -42,7 +45,7 @@ public class ReceiptPrinter {
         }
     }
 
-    private void printReceipt(Receipt receipt) {
+    private static void printReceipt(Receipt receipt) {
         System.out.println("Дата: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         System.out.println("Время: " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
         System.out.println();
@@ -52,12 +55,12 @@ public class ReceiptPrinter {
             Product product = item.getProduct();
             double discount = (item.getQuantity() >= 5 && item.getProduct().isWholesale()) ? product.getPrice()*item.getQuantity() * 0.1 : product.getPrice()*item.getQuantity() * receipt.getDiscountCard().orElse(new DiscountCard() {
                 @Override
-                public String getNumber() {
-                    return null;
+                public int getNumber() {
+                    return 0;
                 }
 
                 @Override
-                public double getDiscountRate() {
+                public int getDiscountRate() {
                     return 0;
                 }
             }).getDiscountRate();
@@ -74,7 +77,7 @@ public class ReceiptPrinter {
         if (receipt.getDiscountCard().isPresent()) {
             System.out.println();
             System.out.printf("%-20s%-10s%n", "Дисконтная карта", "Процент по скидке");
-            System.out.printf("%-20s%-10d%n", receipt.getDiscountCard().get().getNumber(), (int) (receipt.getDiscountCard().get().getDiscountRate() * 100));
+            System.out.printf("%-20s%-10d%n", receipt.getDiscountCard().get().getNumber(), (int) (receipt.getDiscountCard().get().getDiscountRate()));
         }
 
         System.out.println();
@@ -83,7 +86,7 @@ public class ReceiptPrinter {
         System.out.printf("Итого к оплате: %.2f$%n", receipt.getFinalTotal());
 }
 
-    public void printToConsole(Receipt receipt) {
+    public static void printToConsole(Receipt receipt) {
         System.out.println("Чек:");
         printReceipt(receipt);
     }

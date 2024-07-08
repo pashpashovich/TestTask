@@ -11,4 +11,20 @@
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/products</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DiscountCardServlet</servlet-name>
+        <servlet-class>ru.clevertec.check.servlets.DiscountCardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DiscountCardServlet</servlet-name>
+        <url-pattern>/discountcards</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CheckServlet</servlet-name>
+        <servlet-class>ru.clevertec.check.servlets.CheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckServlet</servlet-name>
+        <url-pattern>/check</url-pattern>
+    </servlet-mapping>
 </web-app>

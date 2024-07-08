@@ -18,7 +18,7 @@ public class DiscountPolicy {
             if (product.isWholesale() && item.getQuantity() >= 5) {
                 discount += product.getPrice() * item.getQuantity() * 0.10;
             } else {
-                if (discountCard.isPresent()) discount += product.getPrice() * item.getQuantity() * discountCard.get().getDiscountRate();
+                if (discountCard.isPresent()) discount += product.getPrice() * item.getQuantity() * discountCard.get().getDiscountRate()/100;
             }
         }
         return discount;

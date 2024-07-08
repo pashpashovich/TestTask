@@ -20,6 +20,10 @@ import java.util.Optional;
 
 public class DiscountCardRepository implements Repository<DiscountCard> {
     private static final String toGetCardByNumber="SELECT * FROM \"public\".\"discount_card\" WHERE number=?";
+    private static final String toGetCardById="SELECT * FROM \"public\".\"discount_card\" WHERE id=?";
+    private static final String toSaveCard = "INSERT INTO \"public\".\"discount_card\" (number, amount) VALUES (?, ?)";
+    private static final String toUpdateCard = "UPDATE \"public\".\"discount_card\" SET number = ?, amount = ? WHERE id = ?";
+    private static final String toDeleteCardByNumber = "DELETE FROM \"public\".\"discount_card\" WHERE id = ?";
 
     private final Map<String, DiscountCard> discountCards= new HashMap<>();
     private final DBUtils dbUtils;
@@ -28,14 +32,66 @@ public class DiscountCardRepository implements Repository<DiscountCard> {
         this.dbUtils=dbUtils;
     }
 
-    @Override
-    public Optional<DiscountCard> findById(String number) {
+    public Optional<DiscountCard> findByNumber(int number) {
         DiscountCard discountCard=null;
         try(Connection connection=dbUtils.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement(toGetCardByNumber)) {
-            preparedStatement.setInt(1, Integer.parseInt(number));
+            preparedStatement.setInt(1, number);
             ResultSet rs=preparedStatement.executeQuery();
             while (rs.next()) {
+                int amount = rs.getInt("amount");
+                discountCard=new DiscountCardImpl(number,amount);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+        return Optional.ofNullable(discountCard);
+    }
+
+    public void save(DiscountCard discountCard) {
+        try (Connection connection = dbUtils.getConnection();
+             PreparedStatement statement = connection.prepareStatement(toSaveCard)) {
+            statement.setInt(1, discountCard.getNumber());
+            statement.setInt(2, discountCard.getDiscountRate());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+
+    public void update(DiscountCard discountCard,int id) {
+        try (Connection connection = dbUtils.getConnection();
+             PreparedStatement statement = connection.prepareStatement(toUpdateCard)) {
+            statement.setInt(1, discountCard.getNumber());
+            statement.setInt(2, discountCard.getDiscountRate());
+            statement.setInt(3, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+        }
+    }
+
+    public boolean deleteById(int number) {
+        try (Connection connection = dbUtils.getConnection();
+             PreparedStatement statement = connection.prepareStatement(toDeleteCardByNumber)) {
+            statement.setInt(1, number);
+            int affectedRows = statement.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public Optional<DiscountCard> findById(String id) throws IOException {
+        DiscountCard discountCard=null;
+        try(Connection connection=dbUtils.getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(toGetCardById)) {
+            preparedStatement.setInt(1, Integer.parseInt(id));
+            ResultSet rs=preparedStatement.executeQuery();
+            while (rs.next()) {
+                int number = rs.getInt("number");
                 int amount = rs.getInt("amount");
                 discountCard=new DiscountCardImpl(number,amount);
             }

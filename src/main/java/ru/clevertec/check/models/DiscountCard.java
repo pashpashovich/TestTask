@@ -1,6 +1,6 @@
 package ru.clevertec.check.models;
 
 public interface DiscountCard {
-    String getNumber();
-    double getDiscountRate();
+    int getNumber();
+    int getDiscountRate();
 }

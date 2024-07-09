@@ -2,6 +2,7 @@ package ru.clevertec.check.servlets;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -49,9 +50,9 @@ public class ProductServlet extends HttpServlet {
             productRepository.save(product);
             resp.setContentType("application/json");
             resp.setStatus(HttpServletResponse.SC_CREATED);
-            resp.getWriter().write("{\"message\":\"Product created successfully\"}");
+            resp.getWriter().write("{\"сообщение\":\"Продукт добавлен успешно\"}");
         } catch (IOException e) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid JSON format");
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Неверный формат JSON");
         }
     }
 
@@ -61,23 +62,44 @@ public class ProductServlet extends HttpServlet {
         try {
             String idParam = req.getParameter("id");
             if (idParam == null) {
-                resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Product ID is required");
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID продукта не передан");
                 return;
             }
             int id = Integer.parseInt(idParam);
-            ProductImpl updatedProduct = mapper.readValue(req.getInputStream(), ProductImpl.class);
-            updatedProduct.setId(id);
+            String requestBody = new String(req.getInputStream().readAllBytes());
+            ObjectNode objectNode = (ObjectNode) mapper.readTree(requestBody);
+            objectNode.put("id", id);
+            ProductImpl updatedProduct = mapper.treeToValue(objectNode, ProductImpl.class);
             productRepository.update(updatedProduct);
             resp.setContentType("application/json");
             resp.setStatus(HttpServletResponse.SC_OK);
-            resp.getWriter().write("{\"message\":\"Product updated successfully\"}");
+            resp.getWriter().write("{\"сообщение\":\"Продукт обновлен успешно\"}");
         } catch (NumberFormatException e) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid product ID");
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Неверный ID продукта");
         } catch (IOException e) {
-            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid JSON format or data");
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Неверный формат JSON или данных");
         }
     }
 
-
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String idParam = req.getParameter("id");
+        if (idParam == null) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID продукта не передан");
+            return;
+        }
+        try {
+            int id = Integer.parseInt(idParam);
+            boolean isDeleted = productRepository.deleteById(id);
+            if (isDeleted) {
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.getWriter().write("{\"сообщение\":\"Продукт удален успешно\"}");
+            } else {
+                resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Продукт не найден");
+            }
+        } catch (NumberFormatException e) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Неверный ID продукта");
+        }
+    }
 
 }

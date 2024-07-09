@@ -54,9 +54,7 @@ public class DiscountCardServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            System.out.println("Я тут1");
             DiscountCardImpl discountCard = mapper.readValue(req.getInputStream(), DiscountCardImpl.class);
-            System.out.println("Я тут2");
             discountCardRepository.save(discountCard);
             resp.setContentType("application/json");
             resp.setStatus(HttpServletResponse.SC_CREATED);

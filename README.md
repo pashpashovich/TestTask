@@ -7,6 +7,7 @@ Backend Restful API формирования чека в магазине
 ## Технологии
 - Java 21
 - Gradle 8.7
+- PostgreSQL
 - Servlets Jakarta
 ## Инструкция по запуску
 1. Скачайте или склонируйте репозиторий.

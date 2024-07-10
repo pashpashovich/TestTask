@@ -49,6 +49,9 @@ public class DiscountCardRepository implements Repository<DiscountCard> {
     }
 
     public void save(DiscountCard discountCard) {
+        if (findByNumber(discountCard.getNumber()).isPresent()) {
+            throw new IllegalArgumentException("Скидочная карта с номером " + discountCard.getNumber() + " уже существует");
+        }
         try (Connection connection = dbUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(toSaveCard)) {
             statement.setInt(1, discountCard.getNumber());
@@ -59,7 +62,13 @@ public class DiscountCardRepository implements Repository<DiscountCard> {
         }
     }
 
-    public void update(DiscountCard discountCard,int id) {
+    public void update(DiscountCard discountCard,int id) throws IOException {
+        if (findByNumber(discountCard.getNumber()).isPresent()) {
+            throw new IllegalArgumentException("Скидочная карта с номером " + discountCard.getNumber() + " уже существует");
+        }
+        if(findById(String.valueOf(id)).isEmpty()) {
+            throw new IllegalArgumentException("Скидочная карта с ID " + id + " не существует");
+        }
         try (Connection connection = dbUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(toUpdateCard)) {
             statement.setInt(1, discountCard.getNumber());

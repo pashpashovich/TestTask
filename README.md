@@ -9,6 +9,7 @@
 - PostgreSQL
 - JUnit5
 - Mockito
+- Jacoco
 ## Инструкция по запуску
 1. Скачайте или склонируйте репозиторий.
 2. Создайте базу данных PostgreSQL c username - postgres и password - postgres (или любыми другими, но тогда не забудьте их поменять в 4 задании), DDL/DML операции которой хранятся в src/main/resources/data.sql.

@@ -10,7 +10,6 @@ import ru.clevertec.check.models.CartItem;
 import ru.clevertec.check.models.DiscountCard;
 import ru.clevertec.check.models.Product;
 import ru.clevertec.check.repositories.DiscountCardRepository;
-import ru.clevertec.check.service.CheckRunner;
 import ru.clevertec.check.models.Receipt;
 import ru.clevertec.check.repositories.DBUtils;
 import ru.clevertec.check.repositories.ProductRepository;
@@ -18,12 +17,10 @@ import ru.clevertec.check.service.DiscountPolicy;
 import ru.clevertec.check.service.ReceiptPrinter;
 
 import java.io.*;
-import java.sql.SQLException;
 import java.util.*;
 
 public class CheckServlet extends HttpServlet {
 
-    private CheckRunner checkRunner;
     private DBUtils dbUtils;
 
     @Override
@@ -31,7 +28,6 @@ public class CheckServlet extends HttpServlet {
         dbUtils = new DBUtils(System.getProperty("datasource.url"),
                 System.getProperty("datasource.username"),
                 System.getProperty("datasource.password"));
-        checkRunner = new CheckRunner();
     }
 
     @Override
@@ -68,9 +64,6 @@ public class CheckServlet extends HttpServlet {
             Optional<DiscountCard> discountCard = Optional.empty();
             if (discountCardNumber != null) {
                 discountCard = discountCardRepo.findByNumber(Integer.parseInt(discountCardNumber));
-                if (discountCard.isEmpty()) {
-                    throw new NoDiscountCardException("Скидочная карта не найдена");
-                }
             }
             List<CartItem> cartItemsList = new ArrayList<>(cartItems.values());
             double total = cartItemsList.stream().mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity()).sum();
@@ -112,10 +105,9 @@ public class CheckServlet extends HttpServlet {
             outStream.close();
         } catch (NoProductException e) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, e.getMessage());
-        } catch (InsufficientStockException | NotEnoughMoneyException | IncorrectRequestException |
-                 NoDiscountCardException e) {
+        } catch (InsufficientStockException | NotEnoughMoneyException | IncorrectRequestException e) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
-        } catch (Exception e) {
+        }  catch (Exception e) {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ошибка обработки запроса: " + e.getMessage());
         }
     }

@@ -16,9 +16,7 @@ import java.time.format.DateTimeFormatter;
 public class ReceiptPrinter {
 
     public static void printToFile(Receipt receipt, String filePath) throws IOException {
-        System.out.println("Тут");
         try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
-            System.out.println("Тут2");
             pw.println("Date;Time");
             LocalDate currentDate = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -32,7 +30,6 @@ public class ReceiptPrinter {
                 if (item.getQuantity()>=5 && item.getProduct().isWholesale()) discount = item.getProduct().getPrice()*item.getQuantity() * 0.1;
                 else if (receipt.getDiscountCard().isPresent()) discount = item.getProduct().getPrice()*item.getQuantity()* receipt.getDiscountCard().get().getDiscountRate()/100;
                 pw.println(item.getQuantity()+";"+item.getProduct().getName()+";"+String.format("%.2f$",item.getProduct().getPrice()).replace(",", ".")+";"+String.format("%.2f$",discount).replace(",", ".")+";"+String.format("%.2f$",(item.getQuantity()*item.getProduct().getPrice())).replace(",", "."));
-                System.out.println(item.getQuantity()+";"+item.getProduct().getName()+";"+String.format("%.2f$",item.getProduct().getPrice()).replace(",", ".")+";"+String.format("%.2f$",discount).replace(",", ".")+";"+String.format("%.2f$",(item.getQuantity()*item.getProduct().getPrice())).replace(",", "."));
             }
             if (receipt.getDiscountCard().isPresent()) {
                 pw.println();

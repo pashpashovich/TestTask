@@ -20,5 +20,5 @@ java -cp "C:\Users\Павел\OneDrive\Рабочий стол\2 курс\4 се
 ```
 java -cp src ./src/main/java/ru/clevertec/check/CheckRunner.java 3-1 2-5 5-1 discountCard=1111 balanceDebitCard=100 pathToFile=./products.csv saveToFile=./result.csv
 ```
-4. Чек будет сгенерирован и сохранен в файле scv в директории, указанной в saveToFile, а также выведен в консоль. Данные будут взяты из файла, который находится в директории pathToFile 
+4. Чек будет сгенерирован и сохранен в файле csv в директории, указанной в saveToFile, а также выведен в консоль. Данные будут взяты из файла, который находится в директории pathToFile 
 
